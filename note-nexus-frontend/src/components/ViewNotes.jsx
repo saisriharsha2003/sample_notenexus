@@ -10,7 +10,7 @@ const ViewNotes = () => {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const notesPerPage = 1;
+  const notesPerPage = 4;
   const navigate = useNavigate();
 
   const MAX_CONTENT_LENGTH = 20;
