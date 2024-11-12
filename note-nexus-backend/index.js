@@ -4,6 +4,8 @@ require("dotenv").config();
 const cors = require("cors");
 const app = express();
 
+const port = process.env.PORT || 8080;
+
 app.use(express.json());
 app.use(cors());
 
@@ -23,6 +25,6 @@ mongoose.connect(mongoURI, {
 
 app.use("/api/user", userRouter);
 
-const server = app.listen(8080, () => {
-  console.log("Server started on port 8080");
+const server = app.listen(port, () => {
+  console.log("Server started on port "+port);
 });
