@@ -84,4 +84,14 @@ const add_note = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin, add_note};
+const view_notes = async (req, res) => {
+  try {
+    const notes = await Note.find();
+    res.status(200).json({ notes, message: "Fetched All Notes!" });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching notes" });
+  }
+
+};
+
+module.exports = { signup, signin, add_note, view_notes};
