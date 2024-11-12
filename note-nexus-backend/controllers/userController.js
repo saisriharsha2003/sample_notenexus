@@ -57,4 +57,31 @@ const signin = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin};
+const add_note = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+
+    const owner = req.body.owner || req.user.name; 
+
+    const newNote = new Note({
+      title,
+      content,
+      owner, 
+      lastEditedBy: owner
+    });
+
+    const savedNote = await newNote.save();
+
+    res.status(201).json({
+      message: 'Note added successfully',
+      note: savedNote,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: 'Error adding note',
+      error: error.message,
+    });
+  }
+};
+
+module.exports = { signup, signin, add_note};
