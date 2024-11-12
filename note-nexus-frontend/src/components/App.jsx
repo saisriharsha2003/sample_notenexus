@@ -10,6 +10,8 @@ import AddNote from './AddNote';
 import ViewNotes from './ViewNotes';
 import ViewNote from './ViewNote';
 import EditNote from './EditNote';
+import DeleteNote from './DeleteNote';
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
           <Route path="/view-notes" element={<ViewNotes/>}/>
           <Route path="/view-note/:id" element={<ViewNote />} />
           <Route path="/edit-note/:id" element={<EditNote />} />
+          <Route path="/delete-note/:id" element={<DeleteNote />} />
         </Route>
       </Routes>
     </div>

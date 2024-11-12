@@ -136,4 +136,29 @@ const edit_note = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin, add_note, view_notes, view_note_by_id, edit_note};
+const delete_note = async (req, res) => {
+  const { id } = req.params; 
+  try {
+    const deletedNote = await Note.findByIdAndDelete(id);
+
+    if (!deletedNote) {
+      return res.status(404).json({
+        success: false,
+        message: "Note not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Note successfully deleted",
+    });
+  } catch (error) {
+    console.error("Error deleting note:", error);
+    res.status(500).json({
+      success: false,
+      message: "Server error. Could not delete note",
+    });
+  }
+};
+
+module.exports = { signup, signin, add_note, view_notes, view_note_by_id, edit_note, delete_note};
