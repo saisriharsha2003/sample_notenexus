@@ -85,6 +85,7 @@ const add_note = async (req, res) => {
   }
 };
 
+
 const view_notes = async (req, res) => {
   try {
     const notes = await Note.find();
@@ -183,4 +184,72 @@ const getUserProfile = async (req, res) => {
   }
 };
 
-module.exports = { signup, signin, add_note, view_notes, view_note_by_id, edit_note, delete_note, getUserProfile};
+const updateUserProfile = async (req, res) => {
+  const { uname } = req.params;
+  const { name, email, mobile, newUname } = req.body; 
+
+  try {
+    const user = await User.findOne({ uname });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+
+    if (name) user.name = name;
+    if (email) user.email = email;
+    if (mobile) user.mobile = mobile;
+
+    if (newUname) {
+      const existingUser = await User.findOne({ uname: newUname, name: name});
+      if (existingUser) {
+        return res.status(400).json({ message: 'Username already taken' });
+      }
+      user.uname = newUname;
+    }
+
+    const updatedUser = await user.save();
+
+    return res.status(200).json({
+      message: 'Profile updated successfully',
+      user: updatedUser,
+      uname: updatedUser.uname, 
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Error updating profile',
+      error: error.message,
+    });
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const { uname } = req.params;
+    const { currentPassword, newPassword } = req.body;
+
+    const user = await User.findOne({ uname });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Current password is incorrect" });
+    }
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    user.password = hashedNewPassword;
+    await user.save();
+
+    res.status(200).json({ message: "Password updated successfully!" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error updating password", error: error.message });
+  }
+};
+
+
+module.exports = { signup, signin, add_note, view_notes, view_note_by_id, edit_note, delete_note, getUserProfile, updatePassword, updateUserProfile};
