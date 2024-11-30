@@ -18,7 +18,9 @@ const ViewNotes = () => {
   useEffect(() => {
     const fetchNotes = async () => {
       try {
-        const response = await axios.get(`${BASE_URL}/api/user/view-notes`);
+        const uname = localStorage.getItem("username");
+
+        const response = await axios.get(`${BASE_URL}/api/user/view-notes`, { params: { username: uname } });
         setNotes(response.data.notes || []);
         toast.success(response.data.message);
       } catch (error) {

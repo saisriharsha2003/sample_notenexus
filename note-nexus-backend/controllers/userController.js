@@ -60,14 +60,26 @@ const signin = async (req, res) => {
 
 const add_note = async (req, res) => {
   try {
-    const { title, content } = req.body;
 
-    const owner = req.body.owner || req.user.name; 
+    const { title, content, visibility } = req.body;
+    
+    const owner = req.body.owner ;
+    const uname = req.body.uname ;
+
+    if (!title || !content || !visibility) {
+      return res.status(400).json({ message: "Missing required fields: title, content, visibility" });
+    }
+
+    if (!owner || !uname) {
+      return res.status(400).json({ message: "Owner or Username is missing" });
+    }
 
     const newNote = new Note({
       title,
       content,
-      owner, 
+      owner,
+      visibility, 
+      username: uname,
       lastEditedBy: owner
     });
 
@@ -77,24 +89,35 @@ const add_note = async (req, res) => {
       message: 'Note added successfully',
       note: savedNote,
     });
+
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       message: 'Error adding note',
       error: error.message,
+      stack: error.stack, 
     });
   }
 };
 
-
 const view_notes = async (req, res) => {
   try {
-    const notes = await Note.find();
+    const uname = req.query.username; 
+    
+    const notes = await Note.find({
+      $or: [
+        { visibility: 'public' }, 
+        { username: uname },
+      ]
+    });
+
     res.status(200).json({ notes, message: "Fetched All Notes!" });
   } catch (error) {
     res.status(500).json({ error: "Error fetching notes" });
   }
-
 };
+
 
 const view_note_by_id = async (req, res) => {
   const { noteid } = req.params;

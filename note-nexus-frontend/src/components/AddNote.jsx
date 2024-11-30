@@ -15,6 +15,7 @@ const AddNote = () => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
+    visibility: "private", 
   });
 
   const modules = {
@@ -52,9 +53,7 @@ const AddNote = () => {
   const load = () => {
     return (
       <div
-        className={`flex justify-center items-center h-screen ${
-          loading ? "block" : "hidden"
-        }`}
+        className={`flex justify-center items-center h-screen ${loading ? "block" : "hidden"}`}
       >
         <div className="bg-white p-5 rounded-lg">
           <BeatLoader loading={loading} className="text-cyan-900 text-3xl" />
@@ -69,11 +68,14 @@ const AddNote = () => {
     setLoading(true);
   
     const owner = localStorage.getItem("name");
+    const uname = localStorage.getItem("username");
+
   
     try {
       const response = await axios.post(`${BASE_URL}/api/user/add-note`, {
         ...formData,
-        owner, 
+        owner,
+        uname 
       });
       
       toast.success(response.data.message);
@@ -126,10 +128,36 @@ const AddNote = () => {
                   placeholder="Enter Content"
                   required
                   modules={modules}
-                  className="w-full"
+                  className="w-full text-white"
                 />
               </div>
+
+              <div className="flexcenter w-full mt-4">
+                <div className="p-7">
+                  <input 
+                    type="radio" 
+                    name="visibility" 
+                    value="private" 
+                    id="private" 
+                    checked={formData.visibility === "private"} 
+                    onChange={handleChange} 
+                  />
+                  <label className="text-white" htmlFor="private">Private</label>
+                </div>
+                <div className="p-7">
+                  <input 
+                    type="radio" 
+                    name="visibility" 
+                    value="public" 
+                    id="public" 
+                    checked={formData.visibility === "public"} 
+                    onChange={handleChange} 
+                  />
+                  <label className="text-white" htmlFor="public">Public</label>
+                </div>
+              </div>
             </div>
+
             <div className="button">
               <button type="submit" id="aButton" style={{ cursor: "pointer" }}>
                 Add Note

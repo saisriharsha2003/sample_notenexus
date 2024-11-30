@@ -113,7 +113,7 @@ const EditNote = () => {
                   value={formData.content}
                   modules={modules}
                   onChange={handleContentChange}
-                  className="h-48 mb-14"
+                  className="h-48 mb-14 text-white"
                 />
               </div>
               <div className="text-[#CCBA78] mb-4">
