@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../config"; 
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
-import Nav from "../components/Nav"; 
 
 const ChangePassword = () => {
   const uname = localStorage.getItem("username");
