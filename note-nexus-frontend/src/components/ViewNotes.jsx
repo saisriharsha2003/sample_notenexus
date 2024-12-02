@@ -17,7 +17,7 @@ const ViewNotes = () => {
   const MAX_CONTENT_LENGTH = 20;
 
   useEffect(() => {
-    let isMounted = true; 
+    let isMounted = true;
 
     const fetchNotes = async () => {
       try {
@@ -26,16 +26,18 @@ const ViewNotes = () => {
           params: { username: uname },
         });
 
-        if (isMounted) { 
+        if (isMounted) {
           setNotes(response.data.notes || []);
           toast.success(response.data.message, {
             position: "top-right",
+            autoClose: 1500,
           });
         }
       } catch (error) {
         if (isMounted) {
           toast.error("Failed to fetch notes.", {
             position: "top-right",
+            autoClose: 1500,
           });
         }
         console.error("Error fetching notes:", error);
@@ -49,7 +51,7 @@ const ViewNotes = () => {
     fetchNotes();
 
     return () => {
-      isMounted = false; 
+      isMounted = false;
     };
   }, []);
 
@@ -66,7 +68,7 @@ const ViewNotes = () => {
 
   const renderPagination = () => {
     const pages = [];
-    const maxPagesToShow = 3; // Number of pages to display
+    const maxPagesToShow = 3;
     const half = Math.floor(maxPagesToShow / 2);
 
     let startPage = Math.max(1, currentPage - half);
@@ -79,12 +81,20 @@ const ViewNotes = () => {
 
     if (startPage > 1) {
       pages.push(
-        <button key={1} onClick={() => changePage(1)} className="pagination-btn">
+        <button
+          key={1}
+          onClick={() => changePage(1)}
+          className="pagination-btn"
+        >
           1
         </button>
       );
       if (startPage > 2) {
-        pages.push(<span key="start-ellipsis" className="ellipsis">...</span>);
+        pages.push(
+          <span key="start-ellipsis" className="ellipsis">
+            ...
+          </span>
+        );
       }
     }
 
@@ -104,7 +114,11 @@ const ViewNotes = () => {
 
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
-        pages.push(<span key="end-ellipsis" className="ellipsis">...</span>);
+        pages.push(
+          <span key="end-ellipsis" className="ellipsis">
+            ...
+          </span>
+        );
       }
       pages.push(
         <button
@@ -174,26 +188,38 @@ const ViewNotes = () => {
                             onClick={() => handleView(note._id)}
                             className="mr-4 text-blue-500"
                           >
-                            <i className="fa fa-eye text-3xl" aria-hidden="true"></i>
+                            <i
+                              className="fa fa-eye text-3xl"
+                              aria-hidden="true"
+                            ></i>
                           </button>
                           <button
                             onClick={() => handleEdit(note._id)}
                             className="mr-4"
                           >
-                            <i className="fa fa-pencil text-3xl" aria-hidden="true"></i>
+                            <i
+                              className="fa fa-pencil text-3xl"
+                              aria-hidden="true"
+                            ></i>
                           </button>
                           <button
                             onClick={() => handleDelete(note._id)}
                             className="text-red-500"
                           >
-                            <i className="fa fa-trash text-3xl" aria-hidden="true"></i>
+                            <i
+                              className="fa fa-trash text-3xl"
+                              aria-hidden="true"
+                            ></i>
                           </button>
                         </td>
                       </tr>
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="5" style={{ textAlign: "center", padding: "10px" }}>
+                      <td
+                        colSpan="5"
+                        style={{ textAlign: "center", padding: "10px" }}
+                      >
                         No notes found.
                       </td>
                     </tr>
@@ -225,7 +251,6 @@ const ViewNotes = () => {
           )}
         </div>
       </div>
-      
     </div>
   );
 };

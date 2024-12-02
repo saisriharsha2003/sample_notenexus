@@ -27,7 +27,8 @@ const DeleteNote = () => {
 
       toast.success(response.data.message, {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
       setTimeout(() => {
         toast.success("Redirecting to View Notes...", {
           position: "top-right",
@@ -35,7 +36,7 @@ const DeleteNote = () => {
         setTimeout(() => {
           navigate("/view-notes");
         }, 1000);
-      }, 2000);
+      }, 1000);
     } catch (error) {
       if (error.response && error.response.status === 403) {
         toast.error("You are not authorized to delete this note.", {

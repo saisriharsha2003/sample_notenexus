@@ -57,10 +57,11 @@ const Login = () => {
     if (!formData.uname || !formData.password || !formData.cpassword) {
       toast.error("Fill all details properly", {
         position: "top-right",
+        autoClose: 1500,
       });
       return;
     }
-    
+
     try {
       const response = await axios.post(
         `${BASE_URL}/api/user/login`,
@@ -71,28 +72,36 @@ const Login = () => {
           },
         }
       );
-  
+
       toast.success(response.data.message, {
         position: "top-right",
+        autoClose: 1500,
       });
+      setTimeout(() => {
+        
+      }, 1000);
       if (response.status === 200) {
         const { name, username } = response.data;
-  
+
         localStorage.setItem("name", name);
         localStorage.setItem("username", username);
-  
+
         toast.success("Redirecting to Home...", {
           position: "top-right",
+          autoClose: 1500,
         });
         setTimeout(() => {
           navigate("/home");
         }, 2000);
       }
     } catch (err) {
-      console.error(err); // Log the error for debugging
-      const errorMessage = err.response ? err.response.data.Error : "Something went wrong. Please try again.";
+      console.error(err);
+      const errorMessage = err.response
+        ? err.response.data.Error
+        : "Something went wrong. Please try again.";
       toast.error(errorMessage, {
         position: "top-right",
+        autoClose: 1500,
       });
     }
   };

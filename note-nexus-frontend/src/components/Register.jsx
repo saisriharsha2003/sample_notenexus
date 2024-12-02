@@ -85,7 +85,8 @@ const Register = () => {
     ) {
       toast.error("Fill all details properly", {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
       return;
     }
 
@@ -105,7 +106,8 @@ const Register = () => {
       
       toast.success(response.data.message, {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
 
       setTimeout(() => {
         toast.success("Redirecting to login...", {
@@ -120,7 +122,8 @@ const Register = () => {
         err.response?.data?.message || "An error occurred. Please try again."
       , {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
     } finally {
       setLoading(false);
     }

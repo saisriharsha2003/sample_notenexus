@@ -37,7 +37,8 @@ const ChangePassword = () => {
 
       toast.success(passwordResponse.data.message, {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
       setTimeout(() => {
         toast.success("Redirecting to Home...", {
           position: "top-right",
@@ -45,11 +46,12 @@ const ChangePassword = () => {
         setTimeout(() => {
           navigate("/home");
         }, 1000);
-      }, 2000);
+      }, 1000);
     } catch (error) {
       toast.error("Error updating password.", {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
     } finally {
       setLoading(false);
     }

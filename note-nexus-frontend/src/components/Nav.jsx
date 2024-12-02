@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import '../index.css'; 
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import "../index.css";
 import user from "../assets/user.png";
 import edit from "../assets/edit.png";
 import delete1 from "../assets/delete.png";
@@ -14,7 +14,7 @@ const Nav = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUserName = localStorage.getItem('name'); 
+    const storedUserName = localStorage.getItem("name");
     if (storedUserName) {
       setUserName(storedUserName);
     }
@@ -23,8 +23,9 @@ const Nav = () => {
   const handleLogout = () => {
     toast.success("Logging off...", {
       position: "top-right",
+      autoClose: 1500,
     });
-    localStorage.removeItem('name'); 
+    localStorage.removeItem("name");
     navigate("/");
   };
 
@@ -60,27 +61,36 @@ const Nav = () => {
           </li>
         </ul>
 
-        <img
-          src={user}
-          className="user-pic"
-          alt="User"
-          onClick={toggleMenu}
-        />
+        <img src={user} className="user-pic" alt="User" onClick={toggleMenu} />
 
         <div className="sub-menu-wrap" id="subMenu">
           <div className="sub-menu">
             <div className="user-info">
-              <img src={user} alt="User" style={{ width: '80px', height: '80px' }} />
-              <h2 id="cu_name" style={{ color: '#CCBA78' }}>{userName}</h2>
+              <img
+                src={user}
+                alt="User"
+                style={{ width: "80px", height: "80px" }}
+              />
+              <h2 id="cu_name" style={{ color: "#CCBA78" }}>
+                {userName}
+              </h2>
             </div>
             <hr />
             <Link to="/edit-profile" className="sub-menu-link">
-              <img src={edit} alt="Edit Profile" style={{ width: '50px', height: '50px' }} />
+              <img
+                src={edit}
+                alt="Edit Profile"
+                style={{ width: "50px", height: "50px" }}
+              />
               <p>Edit Profile</p>
               <span className="ext">&gt;</span>
             </Link>
             <Link to="/" className="sub-menu-link" onClick={handleLogout}>
-              <img src={logout} alt="Logout" style={{ width: '50px', height: '50px' }} />
+              <img
+                src={logout}
+                alt="Logout"
+                style={{ width: "50px", height: "50px" }}
+              />
               <p>Logout</p>
               <span className="ext">&gt;</span>
             </Link>

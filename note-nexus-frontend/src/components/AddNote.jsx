@@ -81,21 +81,24 @@ const AddNote = () => {
       
       toast.success(response.data.message, {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
 
       setTimeout(() => {
         toast.success("Redirecting to View Notes", {
           position: "top-right",
+          autoClose: 1500
         });
         setTimeout(() => {
             navigate("/view-notes");
         }, 1000);
-      }, 2000);
+      }, 1000);
 
     } catch (error) {
       toast.error("Error adding note.", {
         position: "top-right",
-      });
+          autoClose: 1500
+        });
       setErrorMessages({
         error: error.response ? error.response.data.error : "Unknown error",
         message: error.message,

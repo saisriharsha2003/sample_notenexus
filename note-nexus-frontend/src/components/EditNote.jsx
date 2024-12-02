@@ -50,6 +50,7 @@ const EditNote = () => {
         console.error("Error fetching note:", error);
         toast.error("Failed to load the note.", {
           position: "top-right",
+          autoClose: 1500,
         });
       } finally {
         setLoading(false);
@@ -90,6 +91,7 @@ const EditNote = () => {
       });
       toast.success(response.data.message, {
         position: "top-right",
+        autoClose: 1500,
       });
       setTimeout(() => {
         toast.success("Redirecting to View Notes...", {
@@ -102,6 +104,7 @@ const EditNote = () => {
     } catch (error) {
       toast.error("Failed to save note.", {
         position: "top-right",
+        autoClose: 1500,
       });
       console.error("Error saving note:", error);
     }
