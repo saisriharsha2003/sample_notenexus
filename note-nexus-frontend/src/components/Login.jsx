@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../config";
 
 const Login = () => {
-  const [successMessage, setSuccessMessage] = useState("");
-
   const [formData, setFormData] = useState({
     uname: "",
     password: "",
@@ -56,13 +55,15 @@ const Login = () => {
     event.preventDefault();
 
     if (!formData.uname || !formData.password || !formData.cpassword) {
-      toast.error("Fill all details properly");
+      toast.error("Fill all details properly", {
+        position: "top-right",
+      });
       return;
     }
     
     try {
       const response = await axios.post(
-        BASE_URL + "/api/user/login",
+        `${BASE_URL}/api/user/login`,
         formData,
         {
           headers: {
@@ -70,25 +71,29 @@ const Login = () => {
           },
         }
       );
-
-      toast.success(response.data.message);
+  
+      toast.success(response.data.message, {
+        position: "top-right",
+      });
       if (response.status === 200) {
-        const name = response.data.name;
-        const username = response.data.username;
-
+        const { name, username } = response.data;
+  
         localStorage.setItem("name", name);
         localStorage.setItem("username", username);
-
+  
+        toast.success("Redirecting to Home...", {
+          position: "top-right",
+        });
         setTimeout(() => {
-          toast.success("Redirecting to Home...");
-          setTimeout(() => {
-            navigate("/home");
-          }, 1000);
+          navigate("/home");
         }, 2000);
       }
     } catch (err) {
-      console.error(err.response);
-      toast.error(err.response.data.Error);
+      console.error(err); // Log the error for debugging
+      const errorMessage = err.response ? err.response.data.Error : "Something went wrong. Please try again.";
+      toast.error(errorMessage, {
+        position: "top-right",
+      });
     }
   };
 

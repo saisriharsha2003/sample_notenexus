@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../config"; 
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
@@ -35,15 +36,21 @@ const ChangePassword = () => {
         newPassword: formData.newPassword,
       });
 
-      toast.success(passwordResponse.data.message);
+      toast.success(passwordResponse.data.message, {
+        position: "top-right",
+      });
       setTimeout(() => {
-        toast.success("Redirecting to Home...");
+        toast.success("Redirecting to Home...", {
+          position: "top-right",
+        });
         setTimeout(() => {
           navigate("/home");
         }, 1000);
       }, 2000);
     } catch (error) {
-      toast.error("Error updating password.");
+      toast.error("Error updating password.", {
+        position: "top-right",
+      });
     } finally {
       setLoading(false);
     }

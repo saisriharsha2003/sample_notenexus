@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "react-quill/dist/quill.snow.css"; 
 import ReactQuill from "react-quill";
 import { BASE_URL } from "../config";
@@ -78,17 +79,23 @@ const AddNote = () => {
         uname 
       });
       
-      toast.success(response.data.message);
+      toast.success(response.data.message, {
+        position: "top-right",
+      });
 
       setTimeout(() => {
-        toast.success("Redirecting to View Notes");
+        toast.success("Redirecting to View Notes", {
+          position: "top-right",
+        });
         setTimeout(() => {
             navigate("/view-notes");
         }, 1000);
       }, 2000);
 
     } catch (error) {
-      toast.error("Error adding note.");
+      toast.error("Error adding note.", {
+        position: "top-right",
+      });
       setErrorMessages({
         error: error.response ? error.response.data.error : "Unknown error",
         message: error.message,
@@ -166,6 +173,7 @@ const AddNote = () => {
           </form>
         </div>
       </div>
+
     </div>
   );
 };

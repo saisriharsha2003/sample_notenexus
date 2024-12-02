@@ -1,7 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { toast } from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../index.css";
 import { BASE_URL } from "../config";
 import MainNav from "./MainNav";
@@ -82,7 +83,9 @@ const Register = () => {
       !formData.password ||
       !formData.cpassword
     ) {
-      toast.error("Fill all details properly");
+      toast.error("Fill all details properly", {
+        position: "top-right",
+      });
       return;
     }
 
@@ -100,10 +103,14 @@ const Register = () => {
         }
       );
       
-      toast.success(response.data.message);
+      toast.success(response.data.message, {
+        position: "top-right",
+      });
 
       setTimeout(() => {
-        toast.success("Redirecting to login...");
+        toast.success("Redirecting to login...", {
+          position: "top-right",
+        });
         setTimeout(() => {
           navigate("/login");
         }, 1000);
@@ -111,7 +118,9 @@ const Register = () => {
     } catch (err) {
       toast.error(
         err.response?.data?.message || "An error occurred. Please try again."
-      );
+      , {
+        position: "top-right",
+      });
     } finally {
       setLoading(false);
     }

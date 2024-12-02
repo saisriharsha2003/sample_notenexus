@@ -12,6 +12,7 @@ import EditNote from "./EditNote";
 import DeleteNote from "./DeleteNote";
 import EditProfile from "./EditProfile";
 import ChangePassword from "./ChangePassword";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/change-password" element={<ChangePassword />} />
       </Routes>
+      <ToastContainer />
     </div>
   );
 }

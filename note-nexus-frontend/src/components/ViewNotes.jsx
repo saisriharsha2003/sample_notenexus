@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import toast from "react-hot-toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Nav from "../components/Nav";
 import { BASE_URL } from "../config";
 import { useNavigate } from "react-router-dom";
@@ -16,22 +17,40 @@ const ViewNotes = () => {
   const MAX_CONTENT_LENGTH = 20;
 
   useEffect(() => {
+    let isMounted = true; 
+
     const fetchNotes = async () => {
       try {
         const uname = localStorage.getItem("username");
+        const response = await axios.get(`${BASE_URL}/api/user/view-notes`, {
+          params: { username: uname },
+        });
 
-        const response = await axios.get(`${BASE_URL}/api/user/view-notes`, { params: { username: uname } });
-        setNotes(response.data.notes || []);
-        toast.success(response.data.message);
+        if (isMounted) { 
+          setNotes(response.data.notes || []);
+          toast.success(response.data.message, {
+            position: "top-right",
+          });
+        }
       } catch (error) {
-        toast.error("Failed to fetch notes.");
+        if (isMounted) {
+          toast.error("Failed to fetch notes.", {
+            position: "top-right",
+          });
+        }
         console.error("Error fetching notes:", error);
       } finally {
-        setLoading(false);
+        if (isMounted) {
+          setLoading(false);
+        }
       }
     };
 
     fetchNotes();
+
+    return () => {
+      isMounted = false; 
+    };
   }, []);
 
   const handleEdit = (noteId) => navigate(`/edit-note/${noteId}`);
@@ -206,6 +225,7 @@ const ViewNotes = () => {
           )}
         </div>
       </div>
+      
     </div>
   );
 };

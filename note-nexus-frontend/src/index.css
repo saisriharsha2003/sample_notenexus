@@ -99,6 +99,10 @@ body{
 	background: linear-gradient(-135deg, #e9c979, #CCBA78);
 	color: #000000;
 }
+.Toastify__toast-container {
+	top: 80px ; 
+  }
+  
 .paybill tbody
 {
 	border: 1px solid #CCBA78;

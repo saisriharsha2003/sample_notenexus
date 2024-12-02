@@ -5,7 +5,8 @@ import user from "../assets/user.png";
 import edit from "../assets/edit.png";
 import delete1 from "../assets/delete.png";
 import logout from "../assets/logout.png";
-import toast from 'react-hot-toast';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/logo.png";
 
 const Nav = () => {
@@ -20,15 +21,23 @@ const Nav = () => {
   }, []);
 
   const handleLogout = () => {
-    toast.success("Logging off...");
+    toast.success("Logging off...", {
+      position: "top-right",
+    });
     localStorage.removeItem('name'); 
     navigate("/");
   };
 
   const toggleMenu = () => {
-    const subm = document.getElementById("subMenu");
-    if (subm) {
-      subm.classList.toggle("open-menu");
+    try {
+      const subm = document.getElementById("subMenu");
+      if (subm) {
+        subm.classList.toggle("open-menu");
+      } else {
+        console.error("subMenu element not found.");
+      }
+    } catch (error) {
+      console.error("Error toggling menu:", error);
     }
   };
 
