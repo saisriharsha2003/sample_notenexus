@@ -78,6 +78,7 @@ const add_note = async (req, res) => {
       title,
       content,
       owner,
+      owner_username: uname,
       visibility, 
       username: uname,
       lastEditedBy: owner
@@ -137,12 +138,12 @@ const view_note_by_id = async (req, res) => {
 };
 
 const edit_note = async (req, res) => {
-  const { id, title, content, lastEditedBy } = req.body;
+  const { id, title, content, lastEditedBy, visibility } = req.body;
 
   try {
     const updatedNote = await Note.findByIdAndUpdate(
       id,
-      { title, content, lastEditedBy }, 
+      { title, content, lastEditedBy, visibility}, 
       { new: true, runValidators: true }
     );
 
@@ -162,28 +163,40 @@ const edit_note = async (req, res) => {
 
 const delete_note = async (req, res) => {
   const { id } = req.params; 
-  try {
-    const deletedNote = await Note.findByIdAndDelete(id);
+  const { username } = req.query;
 
-    if (!deletedNote) {
+  try {
+    const note = await Note.findById(id);
+
+    if (!note) {
       return res.status(404).json({
-        success: false,
+        success: true,
         message: "Note not found",
       });
     }
+
+    if (note.owner_username !== username) {
+      return res.status(403).json({
+        success: true,
+        message: "You are not authorized to delete this note",
+      });
+    }
+
+    await Note.findByIdAndDelete(id);
 
     res.status(200).json({
       success: true,
       message: "Note successfully deleted",
     });
   } catch (error) {
-    console.error("Error deleting note:", error);
+
     res.status(500).json({
       success: false,
       message: "Server error. Could not delete note",
     });
   }
 };
+
 
 const getUserProfile = async (req, res) => {
   try {
