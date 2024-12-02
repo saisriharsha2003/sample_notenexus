@@ -26,7 +26,7 @@ const EditProfile = () => {
   });
 
   useEffect(() => {
-    let isMounted = true; // To track if the component is still mounted
+    let isMounted = true; 
   
     const fetchUserDetails = async () => {
       setLoading(true);

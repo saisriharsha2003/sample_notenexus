@@ -80,7 +80,6 @@ const add_note = async (req, res) => {
       owner,
       owner_username: uname,
       visibility, 
-      username: uname,
       lastEditedBy: owner
     });
 
@@ -109,7 +108,7 @@ const view_notes = async (req, res) => {
     const notes = await Note.find({
       $or: [
         { visibility: 'public' }, 
-        { username: uname },
+        { owner_username: uname },
       ]
     });
 
@@ -221,43 +220,73 @@ const getUserProfile = async (req, res) => {
 };
 
 const updateUserProfile = async (req, res) => {
-  const { uname } = req.params;
+  const { uname } = req.params; 
   const { name, email, mobile, newUname } = req.body; 
 
+   
   try {
     const user = await User.findOne({ uname });
+
+    const oname = user.name;
 
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    if (newUname) {
+      const existingUser = await User.findOne({ uname: newUname });
+      if (existingUser) {
+        return res.status(400).json({ message: 'Username already taken' });
+      }
+    }
 
     if (name) user.name = name;
     if (email) user.email = email;
     if (mobile) user.mobile = mobile;
-
-    if (newUname) {
-      const existingUser = await User.findOne({ uname: newUname, name: name});
-      if (existingUser) {
-        return res.status(400).json({ message: 'Username already taken' });
-      }
-      user.uname = newUname;
-    }
+    if (newUname) user.uname = newUname;
 
     const updatedUser = await user.save();
 
+    const updatedName = name || user.name; 
+    const updatedUsername = newUname || uname; 
+
+    await Note.updateMany(
+      { owner_username: uname }, 
+      {
+        $set: {
+          owner: updatedName,
+          owner_username: updatedUsername,
+        },
+      }
+    );
+
+    await Note.updateMany(
+      {
+        $or: [
+          { lastEditedBy: oname }, 
+          { lastEditedBy: null }, 
+        ],
+      },
+      {
+        $set: {
+          lastEditedBy: updatedName, 
+        },
+      }
+    );
+   
     return res.status(200).json({
-      message: 'Profile updated successfully',
+      message: 'Profile and related notes updated successfully',
       user: updatedUser,
-      uname: updatedUser.uname, 
     });
   } catch (error) {
+    console.error('Error updating profile:', error);
     return res.status(500).json({
       message: 'Error updating profile',
       error: error.message,
     });
   }
 };
+
 
 const updatePassword = async (req, res) => {
   try {

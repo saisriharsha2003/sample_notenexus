@@ -21,10 +21,6 @@ const noteSchema = new mongoose.Schema({
     type: String, 
     required: [true, 'Please provide the visibility for the note'],
   },
-  username: {
-    type: String, 
-    required: [true, 'Please provide the username for the note'],
-  },
   lastEditedBy: { type: String, default: null },
 }, { timestamps: true });
 
