@@ -74,16 +74,16 @@ Open http://localhost:3000 in your browser to use the app.
 
 Backend:
 
-- Node.js: JavaScript runtime for server-side logic.
-- Express.js: Web framework for the backend.
-- MongoDB: Database for storing user and note data.
-- Mongoose: ODM for MongoDB.
-- JWT: Authentication via JSON Web Tokens.
+- **`Node.js`**: JavaScript runtime for server-side logic.
+- **`Express.js`**: Web framework for the backend.
+- **`MongoDB`**: Database for storing user and note data.
+- **`Mongoose`**: ODM for MongoDB.
+- **`JWT`**: Authentication via JSON Web Tokens.
 
 Frontend:
 
-- React.js: Frontend framework for the user interface.
-- Tailwind CSS: Styling framework for consistent and responsive design.
+- **`React.js`**: Frontend framework for the user interface.
+- **`Tailwind CSS`**: Styling framework for consistent and responsive design.
 
 ---
 
@@ -91,18 +91,21 @@ Frontend:
 
 Backend:
 
-- note-nexus-backend/index.js: Entry point for the backend server. Configures middleware and routes.
-- note-nexus-backend/routes/: Contains all API route definitions.
-  - Routes.js: Manages authentication-related routes and also handles CRUD operations for notes.
-- note-nexus-backend/models/: Mongoose schemas and models.
-    - User.js: Schema for user data.
-    - Note.js: Schema for notes data.
-- note-nexus-backend/controllers/: 
-    - UserController.js: Defines the core logic for each route.
+- **`note-nexus-backend/index.js`**: Entry point for the backend server. Configures middleware and routes.
+
+- **`note-nexus-backend/routes/`**: Contains all API route definitions.
+    - **`Routes.js`**: Manages authentication-related routes and also handles CRUD operations for notes.
+
+- **`note-nexus-backend/models/`**: Mongoose schemas and models.
+    - **`User.js`**: Schema for user data.
+    - **`Note.js`**: Schema for notes data.
+
+- **`note-nexus-backend/controllers/`**: 
+    - **`UserController.js`**: Defines the core logic for each route.
 
 Frontend:
 
-- note-nexus-frontend/src/components/: Contains React components.
+- **`note-nexus-frontend/src/components/`**: Contains React components.
     - **`AddNote.jsx`**: Component for creating and adding new notes with visibility options (Public or Private).  
     - **`App.jsx`**: Central routing component that manages navigation between all pages and components of the application.  
     - **`AuthProvider.jsx`**: Context provider for managing user authentication state across the application.  
@@ -120,10 +123,16 @@ Frontend:
     - **`ViewNote.jsx`**: Component for viewing the details of a single note, including its content and metadata.  
     - **`ViewNotes.jsx`**: Component for displaying a list of notes in a table format with pagination and sorting features.
 
+- **`note-nexus-frontend/src/App.js`**:  The entry point for the React application  and the main layout and structure of the app are managed.
 
-AddNote.jsx: Page for adding a new note.
-ViewNotes.jsx: Displays notes in a table format.
-src/App.jsx: Main React application file.
-src/styles/: Tailwind CSS styling files.
+- **`note-nexus-frontend/src/index.css`**: Manages the overall styling of the application, including layout, typography, and theme.
+
+- **`note-nexus-frontend/src/assets/`**: Folder containing all images and media files necessary for the application.
+
+- **`note-nexus-frontend/src/config.js`**: Contains the base URL for the API. The `BASE_URL` can be set to either a local server URL (`http://localhost:8080`) for development or a production server URL (`https://note-nexus.onrender.com`) for deployment. 
+
+- **`note-nexus-frontend/postcss.config.js`**: Configuration file for PostCSS, which is used for processing CSS. It integrates with Tailwind CSS to optimize and transform the CSS for the application, ensuring compatibility with different browsers and enhancing performance.
+
+- **`note-nexus-frontend/tailwind.config.js`**: Configuration file for Tailwind CSS, allowing customization of the default Tailwind setup. It includes options for defining theme colors, fonts, breakpoints, and other settings specific to the project’s styling requirements.
 
 
