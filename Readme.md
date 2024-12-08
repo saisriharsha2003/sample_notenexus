@@ -68,3 +68,62 @@ npm start
 
 Open http://localhost:3000 in your browser to use the app.
 
+---
+
+## Dependencies and Prerequisites
+
+Backend:
+
+- Node.js: JavaScript runtime for server-side logic.
+- Express.js: Web framework for the backend.
+- MongoDB: Database for storing user and note data.
+- Mongoose: ODM for MongoDB.
+- JWT: Authentication via JSON Web Tokens.
+
+Frontend:
+
+- React.js: Frontend framework for the user interface.
+- Tailwind CSS: Styling framework for consistent and responsive design.
+
+---
+
+## Explanation of the Main Files
+
+Backend:
+
+- note-nexus-backend/index.js: Entry point for the backend server. Configures middleware and routes.
+- note-nexus-backend/routes/: Contains all API route definitions.
+  - Routes.js: Manages authentication-related routes and also handles CRUD operations for notes.
+- note-nexus-backend/models/: Mongoose schemas and models.
+    - User.js: Schema for user data.
+    - Note.js: Schema for notes data.
+- note-nexus-backend/controllers/: 
+    - UserController.js: Defines the core logic for each route.
+
+Frontend:
+
+- note-nexus-frontend/src/components/: Contains React components.
+    - **`AddNote.jsx`**: Component for creating and adding new notes with visibility options (Public or Private).  
+    - **`App.jsx`**: Central routing component that manages navigation between all pages and components of the application.  
+    - **`AuthProvider.jsx`**: Context provider for managing user authentication state across the application.  
+    - **`Changepassword.jsx`**: Component for allowing users to change their account password securely.  
+    - **`DeleteNote.jsx`**: Component responsible for confirming and handling the deletion of notes.  
+    - **`EditNote.jsx`**: Component for editing the content and visibility settings of existing notes.  
+    - **`Editprofile.jsx`**: Component that enables users to update their profile details.  
+    - **`Home.jsx`**: The home page displayed after login, serving as the main dashboard for users.  
+    - **`Login.jsx`**: Component for user login, handling authentication and redirecting upon success.  
+    - **`Main.jsx`**: The initial webpage displayed when the application starts.  
+    - **`MainNav.jsx`**: Navigation bar component shown before login or during registration.  
+    - **`Nav.jsx`**: Navigation bar component displayed after login, providing options for navigating the application.  
+    - **`ProtectedLayout.jsx`**: Wrapper component ensuring access to certain routes is restricted to authenticated users only.  
+    - **`Register.jsx`**: Component for new user registration, collecting user details and creating an account.  
+    - **`ViewNote.jsx`**: Component for viewing the details of a single note, including its content and metadata.  
+    - **`ViewNotes.jsx`**: Component for displaying a list of notes in a table format with pagination and sorting features.
+
+
+AddNote.jsx: Page for adding a new note.
+ViewNotes.jsx: Displays notes in a table format.
+src/App.jsx: Main React application file.
+src/styles/: Tailwind CSS styling files.
+
+
