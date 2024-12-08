@@ -19,7 +19,7 @@ A **collaborative note-taking application** where users can register, log in, an
 ## Steps to Set Up and Run the Code
 
 ### Prerequisites:
-- Ensure you have the following installed:
+Ensure you have the following installed:
   - **Node.js** (v14+ recommended)
   - **MongoDB** (local or hosted)
 
@@ -31,7 +31,7 @@ cd NoteNexus
 
 ### 2. Install Dependencies
 
-- Run the following command to install all required packages:
+Run the following command to install all required packages:
 
 ```bash
 cd note-nexus-frontend
@@ -45,7 +45,7 @@ npm install
   
 ### 3. Configuring Environment Variables
 
-- Create a .env file in note-nexus-backend with the following values:
+Create a .env file in note-nexus-backend with the following values:
 
 ```bash
 MONGO_URI=<Your MongoDB connection string>
@@ -66,5 +66,5 @@ npm start
 
 ### 5. Access the Application
 
-- Open http://localhost:3000 in your browser to use the app.
+Open http://localhost:3000 in your browser to use the app.
 
