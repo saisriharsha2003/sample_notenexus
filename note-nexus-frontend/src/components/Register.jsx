@@ -136,7 +136,7 @@ const Register = () => {
       </div>
       <div className="bg1">
         <div className="container">
-          <div className="title">Register to NoteNexus</div>
+          <div className="title">Register to SyncNote</div>
           <form onSubmit={handleSubmit}>
             <div className="user-details">
               <div className="input-box">

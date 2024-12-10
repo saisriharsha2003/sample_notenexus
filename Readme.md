@@ -1,4 +1,4 @@
-# NoteNexus
+# SyncNote
 
 A **collaborative note-taking application** where users can register, log in, and manage their notes with privacy controls. Users can add, edit, view, and delete notes based on visibility settings (Public/Private). The platform ensures that only note owners can delete their private notes.
 
@@ -6,7 +6,7 @@ A **collaborative note-taking application** where users can register, log in, an
 
 ## Project Overview
 
-**NoteNexus** is designed to simplify collaborative note management with the following key features:
+**SyncNote** is designed to simplify collaborative note management with the following key features:
 - **User Authentication**: Secure registration and login system.
 - **Home Page**: A personalized welcome screen with a navigation bar.
 - **Add Notes**: Create notes with visibility options (`Public` or `Private`).
@@ -26,7 +26,7 @@ Ensure you have the following installed:
 ### 1. Clone the Repository
 ```bash
 git clone <repository_url>
-cd NoteNexus
+cd SyncNote
 ```
 
 ### 2. Install Dependencies

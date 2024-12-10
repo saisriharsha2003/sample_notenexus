@@ -121,7 +121,7 @@ const EditNote = () => {
           ) : (
             <form>
               <div className="input-box1 w-full mb-4">
-                <label className="text-[#CCBA78] pb-2 block mb-2 font-semibold">
+                <label className="text-[#e8779a] pb-2 block mb-2 font-semibold">
                   Title
                 </label>
                 <input
@@ -133,7 +133,7 @@ const EditNote = () => {
                 />
               </div>
               <div className="input-box1 w-full pb-4">
-                <label className="text-[#CCBA78] block mb-2 font-semibold">
+                <label className="text-[#e8779a] block mb-2 font-semibold">
                   Content
                 </label>
                 <ReactQuill
@@ -143,14 +143,14 @@ const EditNote = () => {
                   className="h-48 mb-14 text-white"
                 />
               </div>
-              <div className="text-[#CCBA78] mb-4">
+              <div className="text-[#e8779a] mb-4">
                 <span className="font-semibold">Last Edited By:</span>{" "}
                 <span className="text-white">{formData.lastEditedBy}</span>
               </div>
               <div className="mb-4">
                 {formData.owner === user ? (
                   <div>
-                    <label className="text-[#CCBA78] font-semibold">
+                    <label className="text-[#e8779a] font-semibold">
                       Visibility:{" "}
                     </label>
                     <button
@@ -165,7 +165,7 @@ const EditNote = () => {
                     >
                       {formData.visibility === "public" ? "Public" : "Private"}
                     </button>
-                    <p className="text-sm text-gray-300 mt-1">
+                    <p className="text-sm text-gray-800 mt-1">
                       Click the button to change visibility.
                     </p>
                   </div>

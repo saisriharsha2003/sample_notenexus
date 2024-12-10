@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../index.css";
-import user from "../assets/user.png";
+import user from "../assets/user.svg";
 import edit from "../assets/edit.png";
-import delete1 from "../assets/delete.png";
 import logout from "../assets/logout.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -71,7 +70,7 @@ const Nav = () => {
                 alt="User"
                 style={{ width: "80px", height: "80px" }}
               />
-              <h2 id="cu_name" style={{ color: "#CCBA78" }}>
+              <h2 id="cu_name" style={{ color: "#e8779a" }}>
                 {userName}
               </h2>
             </div>

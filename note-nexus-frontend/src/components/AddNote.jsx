@@ -138,7 +138,7 @@ const AddNote = () => {
                   placeholder="Enter Content"
                   required
                   modules={modules}
-                  className="w-full text-white"
+                  className="w-full text-black"
                 />
               </div>
 
@@ -152,7 +152,7 @@ const AddNote = () => {
                     checked={formData.visibility === "private"} 
                     onChange={handleChange} 
                   />
-                  <label className="text-white" htmlFor="private">Private</label>
+                  <label className="text-black" htmlFor="private">Private</label>
                 </div>
                 <div className="p-7">
                   <input 
@@ -163,7 +163,7 @@ const AddNote = () => {
                     checked={formData.visibility === "public"} 
                     onChange={handleChange} 
                   />
-                  <label className="text-white" htmlFor="public">Public</label>
+                  <label className="text-black" htmlFor="public">Public</label>
                 </div>
               </div>
             </div>
