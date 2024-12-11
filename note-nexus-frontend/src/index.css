@@ -697,9 +697,9 @@ nav ul li .dropdown-content a {
 }
 .sub-menu hr {
   margin-top: 15px;
-  height: 1px;
+  height: 2px;
   width: 100%;
-  color: #e8779a;
+  color: black;
 }
 .bg21 {
   display: flex;

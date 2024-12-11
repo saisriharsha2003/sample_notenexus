@@ -75,7 +75,7 @@ const Nav = () => {
                 {userName}
               </h2>
             </div>
-            <hr />
+            <hr className="text-black mt-4 w-4/5 h-2" />
             <Link to="/edit-profile" className="sub-menu-link">
               <img
                 src={edit}
