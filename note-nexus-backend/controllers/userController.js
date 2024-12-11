@@ -112,7 +112,6 @@ const view_notes = async (req, res) => {
   }
 };
 
-
 const view_note_by_id = async (req, res) => {
   const { noteid } = req.params;
 
