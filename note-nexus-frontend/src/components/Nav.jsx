@@ -75,7 +75,7 @@ const Nav = () => {
                 {userName}
               </h2>
             </div>
-            <hr className="text-black mt-4 w-4/5 h-2" />
+            <hr style={{ border: "1.5px solid black", marginTop: "16px", width: "100%", height: "2px" }} />
             <Link to="/edit-profile" className="sub-menu-link">
               <img
                 src={edit}

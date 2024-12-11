@@ -487,12 +487,14 @@ form .button button:hover {
   position: absolute;
   top: 100%;
   right: 4%;
+  margin-top: 0.1px;
   border-radius: 10px;
   width: 320px;
   background: #e8779a;
   max-height: 0px;
   overflow: hidden;
   transition: max-height 0.5s;
+  z-index: 1000;
 }
 .ext {
   color: #e8779a;
@@ -512,7 +514,7 @@ form .button button:hover {
 }
 .user-info img {
   border-radius: 50%;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 .sub-menu-link {
   display: flex;
@@ -529,7 +531,7 @@ form .button button:hover {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  margin-right: 50px;
+  margin-right: 40px;
   padding: 8px;
 }
 .sub-menu-link span {
