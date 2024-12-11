@@ -186,7 +186,6 @@ const EditProfile = () => {
               </button>
             </div>
           </form>
-          <ChangePassword />
         </div>
       </div>
     </div>
