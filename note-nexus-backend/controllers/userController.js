@@ -61,13 +61,13 @@ const signin = async (req, res) => {
 const add_note = async (req, res) => {
   try {
 
-    const { title, content, visibility } = req.body;
+    const { title, content } = req.body;
     
     const owner = req.body.owner ;
     const uname = req.body.uname ;
 
-    if (!title || !content || !visibility) {
-      return res.status(400).json({ message: "Missing required fields: title, content, visibility" });
+    if (!title || !content ) {
+      return res.status(400).json({ message: "Missing required fields: title, content" });
     }
 
     if (!owner || !uname) {
@@ -79,7 +79,6 @@ const add_note = async (req, res) => {
       content,
       owner,
       owner_username: uname,
-      visibility, 
       lastEditedBy: owner
     });
 
@@ -105,12 +104,7 @@ const view_notes = async (req, res) => {
   try {
     const uname = req.query.username; 
     
-    const notes = await Note.find({
-      $or: [
-        { visibility: 'public' }, 
-        { owner_username: uname },
-      ]
-    });
+    const notes = await Note.find();
 
     res.status(200).json({ notes, message: "Fetched All Notes!" });
   } catch (error) {
@@ -137,12 +131,12 @@ const view_note_by_id = async (req, res) => {
 };
 
 const edit_note = async (req, res) => {
-  const { id, title, content, lastEditedBy, visibility } = req.body;
+  const { id, title, content, lastEditedBy } = req.body;
 
   try {
     const updatedNote = await Note.findByIdAndUpdate(
       id,
-      { title, content, lastEditedBy, visibility}, 
+      { title, content, lastEditedBy }, 
       { new: true, runValidators: true }
     );
 

@@ -17,7 +17,6 @@ const EditNote = () => {
     content: "",
     lastEditedBy: "",
     owner: "",
-    visibility: "private",
   });
 
   const user = localStorage.getItem("username");
@@ -43,7 +42,6 @@ const EditNote = () => {
           content: response.data.note.content,
           lastEditedBy: response.data.note.lastEditedBy || "Unknown",
           owner: response.data.note.owner_username,
-          visibility: response.data.note.visibility || "private",
         });
         console.log(formData.owner);
       } catch (error) {
@@ -72,13 +70,6 @@ const EditNote = () => {
     setFormData((prevData) => ({
       ...prevData,
       content: value,
-    }));
-  };
-
-  const handleVisibilityToggle = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      visibility: prevData.visibility === "private" ? "public" : "private",
     }));
   };
 
@@ -140,38 +131,12 @@ const EditNote = () => {
                   value={formData.content}
                   modules={modules}
                   onChange={handleContentChange}
-                  className="h-48 mb-14 text-white"
+                  className="h-48 mb-14 text-black"
                 />
               </div>
               <div className="text-[#e8779a] mb-4">
                 <span className="font-semibold">Last Edited By:</span>{" "}
-                <span className="text-white">{formData.lastEditedBy}</span>
-              </div>
-              <div className="mb-4">
-                {formData.owner === user ? (
-                  <div>
-                    <label className="text-[#e8779a] font-semibold">
-                      Visibility:{" "}
-                    </label>
-                    <button
-                      type="button"
-                      onClick={handleVisibilityToggle}
-                      className={`px-4 py-2 ${
-                        formData.visibility === "public"
-                          ? "bg-green-500 text-white"
-                          : "bg-blue-500 text-white"
-                      } rounded`}
-                      title="Click to toggle between Public and Private"
-                    >
-                      {formData.visibility === "public" ? "Public" : "Private"}
-                    </button>
-                    <p className="text-sm text-gray-800 mt-1">
-                      Click the button to change visibility.
-                    </p>
-                  </div>
-                ) : (
-                  " "
-                )}
+                <span className="text-black">{formData.lastEditedBy}</span>
               </div>
 
               <div className="flexcenter">
