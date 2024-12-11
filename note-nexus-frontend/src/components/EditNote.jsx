@@ -21,7 +21,15 @@ const EditNote = () => {
   const user = localStorage.getItem("username");
 
   const modules = {
-    toolbar: false
+    toolbar: [
+      [{ header: "1" }, { header: "2" }, { font: [] }],
+      [{ align: [] }],
+      [{ color: [] }, { background: [] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
   };
 
   useEffect(() => {
