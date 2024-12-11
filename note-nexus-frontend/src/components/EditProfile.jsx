@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../config";
 import { useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
@@ -35,10 +34,7 @@ const EditProfile = () => {
           `${BASE_URL}/api/user/profile/${uname}`
         );
         if (isMounted) {
-          toast.success("Fetching Details...", {
-            position: "top-right",
-            autoClose: 1500,
-          });
+          toast.success("Fetching Details...");
           const userData = response.data;
           setFormData({
             name: userData.name,
@@ -50,10 +46,7 @@ const EditProfile = () => {
         }
       } catch (error) {
         if (isMounted) {
-          toast.error("Failed to load profile details.", {
-            position: "top-right",
-            autoClose: 1500,
-          });
+          toast.error("Failed to load profile details.");
         }
         console.error("Error fetching user details:", error);
       } finally {
@@ -88,27 +81,18 @@ const EditProfile = () => {
         formData
       );
 
-      toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.success(response.data.message);
       localStorage.setItem("username", response.data.user.uname);
       localStorage.setItem("name", response.data.user.name);
 
       setTimeout(() => {
-        toast.success("Redirecting to User Profile...", {
-          position: "top-right",
-          autoClose: 1500,
-        });
+        toast.success("Redirecting to User Profile...");
         setTimeout(() => {
           navigate("/edit-profile");
         }, 1000);
       }, 2000);
     } catch (error) {
-      toast.error("Error updating profile.", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error("Error updating profile.");
       setErrorMessages({
         error: error.response ? error.response.data.error : "Unknown error",
         message: error.message,

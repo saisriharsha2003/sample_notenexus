@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MainNav from "./MainNav";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import { BASE_URL } from "../config";
 
 const Login = () => {
@@ -55,10 +54,7 @@ const Login = () => {
     event.preventDefault();
 
     if (!formData.uname || !formData.password || !formData.cpassword) {
-      toast.error("Fill all details properly", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error("Fill all details properly");
       return;
     }
 
@@ -73,10 +69,7 @@ const Login = () => {
         }
       );
 
-      toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.success(response.data.message);
       setTimeout(() => {
         
       }, 1000);
@@ -86,10 +79,7 @@ const Login = () => {
         localStorage.setItem("name", name);
         localStorage.setItem("username", username);
 
-        toast.success("Redirecting to Home...", {
-          position: "top-right",
-          autoClose: 1500,
-        });
+        toast.success("Redirecting to Home...");
         setTimeout(() => {
           navigate("/home");
         }, 2000);
@@ -99,10 +89,7 @@ const Login = () => {
       const errorMessage = err.response
         ? err.response.data.Error
         : "Something went wrong. Please try again.";
-      toast.error(errorMessage, {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error(errorMessage);
     }
   };
 

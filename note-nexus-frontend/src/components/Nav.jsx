@@ -4,8 +4,7 @@ import "../index.css";
 import user from "../assets/user.svg";
 import edit from "../assets/edit.png";
 import logout from "../assets/logout.png";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import logo from "../assets/logo.png";
 import reset_password from "../assets/edit_password.png"
 
@@ -21,10 +20,7 @@ const Nav = () => {
   }, []);
 
   const handleLogout = () => {
-    toast.success("Logging off...", {
-      position: "top-right",
-      autoClose: 1500,
-    });
+    toast.success("Logging off...");
     localStorage.removeItem("name");
     navigate("/");
   };

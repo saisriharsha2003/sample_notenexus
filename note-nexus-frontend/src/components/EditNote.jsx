@@ -3,8 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 import { BASE_URL } from "../config";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -22,15 +21,7 @@ const EditNote = () => {
   const user = localStorage.getItem("username");
 
   const modules = {
-    toolbar: [
-      [{ header: "1" }, { header: "2" }, { font: [] }],
-      [{ align: [] }],
-      [{ color: [] }, { background: [] }],
-      ["bold", "italic", "underline", "strike"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link"],
-      ["clean"],
-    ],
+    toolbar: false
   };
 
   useEffect(() => {
@@ -46,10 +37,7 @@ const EditNote = () => {
         console.log(formData.owner);
       } catch (error) {
         console.error("Error fetching note:", error);
-        toast.error("Failed to load the note.", {
-          position: "top-right",
-          autoClose: 1500,
-        });
+        toast.error("Failed to load the note.");
       } finally {
         setLoading(false);
       }
@@ -80,23 +68,15 @@ const EditNote = () => {
         id: id,
         lastEditedBy: localStorage.getItem("name"),
       });
-      toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.success(response.data.message);
       setTimeout(() => {
-        toast.success("Redirecting to View Notes...", {
-          position: "top-right",
-        });
+        toast.success("Redirecting to View Notes...");
         setTimeout(() => {
           navigate("/view-notes");
         }, 1000);
       }, 2000);
     } catch (error) {
-      toast.error("Failed to save note.", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error("Failed to save note.");
       console.error("Error saving note:", error);
     }
   };
@@ -111,32 +91,34 @@ const EditNote = () => {
             <p>Loading note...</p>
           ) : (
             <form>
-              <div className="input-box1 w-full mb-4">
-                <label className="text-[#e8779a] pb-2 block mb-2 font-semibold">
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  value={formData.title}
-                  onChange={handleChange}
-                  className="w-full p-2 border"
-                />
-              </div>
-              <div className="input-box1 w-full pb-4">
-                <label className="text-[#e8779a] block mb-2 font-semibold">
-                  Content
-                </label>
-                <ReactQuill
-                  value={formData.content}
-                  modules={modules}
-                  onChange={handleContentChange}
-                  className="h-48 mb-14 text-black"
-                />
-              </div>
-              <div className="text-[#e8779a] mb-4">
-                <span className="font-semibold">Last Edited By:</span>{" "}
-                <span className="text-black">{formData.lastEditedBy}</span>
+              <div className="user-details">
+                <div className="input-box1 w-full mb-4">
+                  <label className="text-[#e8779a] pb-2 block mb-2 font-semibold">
+                    Title
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    value={formData.title}
+                    onChange={handleChange}
+                    className="w-full p-2 border"
+                  />
+                </div>
+                <div className="input-box1 w-full pb-4">
+                  <label className="text-[#e8779a] block mb-2 font-semibold">
+                    Content
+                  </label>
+                  <ReactQuill
+                    value={formData.content}
+                    modules={modules}
+                    onChange={handleContentChange}
+                    className="h-48 mb-14 text-black"
+                  />
+                </div>
+                <div className="text-[#e8779a] mb-4">
+                  <span className="font-semibold">Last Edited By:</span>{" "}
+                  <span className="text-black">{formData.lastEditedBy}</span>
+                </div>
               </div>
 
               <div className="flexcenter">

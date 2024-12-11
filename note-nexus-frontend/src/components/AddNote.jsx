@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import "react-quill/dist/quill.snow.css";
 import ReactQuill from "react-quill";
 import { BASE_URL } from "../config";
@@ -79,25 +78,16 @@ const AddNote = () => {
         uname,
       });
 
-      toast.success(response.data.message, {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.success(response.data.message);
 
       setTimeout(() => {
-        toast.success("Redirecting to View Notes", {
-          position: "top-right",
-          autoClose: 1500,
-        });
+        toast.success("Redirecting to View Notes");
         setTimeout(() => {
           navigate("/view-notes");
         }, 1000);
       }, 1000);
     } catch (error) {
-      toast.error("Error adding note.", {
-        position: "top-right",
-        autoClose: 1500,
-      });
+      toast.error("Error adding note.");
       setErrorMessages({
         error: error.response ? error.response.data.error : "Unknown error",
         message: error.message,
@@ -118,7 +108,9 @@ const AddNote = () => {
           <form onSubmit={handleSubmit} className="w-full">
             <div className="user-details">
               <div className="input-box1 w-full">
-                <span className="details">Title</span>
+                <label className="text-[#e8779a] font-semibold pb-2 block mb-2">
+                  Title
+                </label>
                 <input
                   type="text"
                   name="title"
@@ -130,8 +122,8 @@ const AddNote = () => {
                 />
               </div>
               <div className="input-box1 w-full mt-4">
-                <span className="details">Content</span>
-                <ReactQuill
+              <label className="text-[#e8779a] block font-semibold mb-2">Content</label>
+              <ReactQuill
                   value={formData.content}
                   onChange={handleContentChange}
                   placeholder="Enter Content"

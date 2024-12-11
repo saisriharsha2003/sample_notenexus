@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import Nav from "../components/Nav";
 import { BASE_URL } from "../config";
 import { useNavigate } from "react-router-dom";
@@ -28,17 +27,11 @@ const ViewNotes = () => {
 
         if (isMounted) {
           setNotes(response.data.notes || []);
-          toast.success(response.data.message, {
-            position: "top-right",
-            autoClose: 1500,
-          });
+          toast.success(response.data.message);
         }
       } catch (error) {
         if (isMounted) {
-          toast.error("Failed to fetch notes.", {
-            position: "top-right",
-            autoClose: 1500,
-          });
+          toast.error("Failed to fetch notes.");
         }
         console.error("Error fetching notes:", error);
       } finally {

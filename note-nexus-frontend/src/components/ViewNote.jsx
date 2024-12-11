@@ -13,7 +13,15 @@ const ViewNote = () => {
   const [loading, setLoading] = useState(true);
 
   const modules = {
-    toolbar: false, 
+    toolbar: [
+      [{ header: "1" }, { header: "2" }, { font: [] }],
+      [{ align: [] }],
+      [{ color: [] }, { background: [] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+      ["clean"],
+    ],
   };
 
   useEffect(() => {
@@ -40,7 +48,7 @@ const ViewNote = () => {
           <form>
             <div className="user-details">
               <div className="input-box1 w-full mb-4">
-                <label className="text-[#CCBA78] pb-2 block mb-2">Title</label>
+                <label className="text-[#e8779a] font-semibold pb-2 block mb-2">Title</label>
                 <input
                   type="text"
                   value={note?.title || ""}
@@ -49,13 +57,14 @@ const ViewNote = () => {
                 />
               </div>
               <div className="input-box1 w-full pb-4">
-                <label className="text-[#CCBA78] block mb-2">Content</label>
+                <label className="text-[#e8779a] block font-semibold mb-2">Content</label>
                 <ReactQuill
                   value={note?.content || ""}
                   readOnly={true}
                   theme="bubble"
+                  required
                   modules={modules}
-                  className="h-48 mb-4 text-white"
+                  className="h-48 mb-4 text-black border border-neutral-950"
                 />
               </div>
             </div>

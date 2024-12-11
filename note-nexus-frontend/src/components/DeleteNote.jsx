@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import toast from "react-hot-toast";import "react-toastify/dist/ReactToastify.css";
 import Nav from "../components/Nav";
 import { BASE_URL } from "../config";
 import { useParams, useNavigate } from "react-router-dom";
@@ -25,27 +24,18 @@ const DeleteNote = () => {
         { params: { username: user } }
       );
 
-      toast.success(response.data.message, {
-        position: "top-right",
-          autoClose: 1500
-        });
+      toast.success(response.data.message);
       setTimeout(() => {
-        toast.success("Redirecting to View Notes...", {
-          position: "top-right",
-        });
+        toast.success("Redirecting to View Notes...");
         setTimeout(() => {
           navigate("/view-notes");
         }, 1000);
       }, 1000);
     } catch (error) {
       if (error.response && error.response.status === 403) {
-        toast.error("You are not authorized to delete this note.", {
-          position: "top-right",
-        });
+        toast.error("You are not authorized to delete this note.");
       } else {
-        toast.error("Failed to delete note.", {
-          position: "top-right",
-        });
+        toast.error("Failed to delete note.");
       }
     }
   };
